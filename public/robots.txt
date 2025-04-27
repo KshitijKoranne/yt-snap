@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://yt-snap.vercel.app/sitemap.xml
