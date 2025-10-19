@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { extractYouTubeId, isValidYouTubeUrl } from "@/lib/youtube-utils";
+import { useYouTubeMetadata } from "@/hooks/useYouTubeMetadata";
 import ThumbnailGallery from "@/components/ThumbnailGallery";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,44 +12,38 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface VideoInfo {
-  title: string;
-  channel: string;
-  views: string;
-  publishedAt: string;
-  description: string;
-  thumbnail: string;
-}
-
 export default function YouTubeExtractor() {
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Use SWR hook for metadata fetching with caching
+  const { metadata, isLoading: isLoadingMetadata, isError } = useYouTubeMetadata(videoId);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setIsLoading(true);
+    setIsProcessing(true);
 
     const trimmedUrl = url.trim();
     if (!trimmedUrl) {
       setError("Please enter a YouTube URL");
-      setIsLoading(false);
+      setIsProcessing(false);
       return;
     }
 
     try {
       if (!isValidYouTubeUrl(trimmedUrl)) {
         setError("Please enter a valid YouTube URL (e.g., https://www.youtube.com/watch?v=...)");
-        setIsLoading(false);
+        setIsProcessing(false);
         return;
       }
 
       const id = extractYouTubeId(trimmedUrl);
       if (!id) {
         setError("Could not extract video ID. Please check if the URL is correct and try again.");
-        setIsLoading(false);
+        setIsProcessing(false);
         return;
       }
 
@@ -57,7 +52,7 @@ export default function YouTubeExtractor() {
       setError("An unexpected error occurred. Please try again.");
       console.error("Error processing YouTube URL:", err);
     } finally {
-      setIsLoading(false);
+      setIsProcessing(false);
     }
   };
 
@@ -79,11 +74,11 @@ export default function YouTubeExtractor() {
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste YouTube URL here..."
               className="pr-10"
-              disabled={isLoading}
+              disabled={isProcessing}
             />
           </div>
-          <Button type="submit" className="font-medium" disabled={isLoading}>
-            {isLoading ? (
+          <Button type="submit" className="font-medium" disabled={isProcessing}>
+            {isProcessing ? (
               <div className="flex items-center">
                 <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
                 Processing...
@@ -119,7 +114,7 @@ export default function YouTubeExtractor() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ThumbnailGallery videoId={videoId} />
+          <ThumbnailGallery videoId={videoId} metadata={metadata} isLoadingMetadata={isLoadingMetadata} />
         </motion.div>
       )}
     </div>

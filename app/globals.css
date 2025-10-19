@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -77,6 +79,38 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: #f8f9fa;
+    background: radial-gradient(circle, transparent 20%, #f8f9fa 20%, #f8f9fa 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #f8f9fa 20%, #f8f9fa 80%, transparent 80%, transparent) 20px 20px, linear-gradient(#d1d5db 1.6px, transparent 1.6px) 0 -0.8px, linear-gradient(90deg, #d1d5db 1.6px, #f8f9fa 1.6px) -0.8px 0;
+    background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
   }
+
+  .dark body {
+    background-color: #0f172a;
+    background: radial-gradient(circle, transparent 20%, #0f172a 20%, #0f172a 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #0f172a 20%, #0f172a 80%, transparent 80%, transparent) 20px 20px, linear-gradient(#334155 1.6px, transparent 1.6px) 0 -0.8px, linear-gradient(90deg, #334155 1.6px, #0f172a 1.6px) -0.8px 0;
+    background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
+  }
+}
+
+/* Custom cursive font and gradient animation */
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
 }

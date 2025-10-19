@@ -139,12 +139,12 @@ export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) 
               onError={handleImageError}
             />
           )}
-          <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center gap-2">
+          <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 flex flex-col items-center justify-center gap-2 p-4">
             <Button
               variant="secondary"
               size="sm"
               onClick={() => setIsOpen(true)}
-              className="gap-1"
+              className="gap-1 w-full max-w-[140px]"
             >
               <Maximize2 className="h-4 w-4" />
               Customize
@@ -154,7 +154,7 @@ export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) 
               size="sm"
               onClick={handleDownload}
               disabled={isDownloading}
-              className="gap-1"
+              className="gap-1 w-full max-w-[140px]"
             >
               <Download className="h-4 w-4" />
               {isDownloading ? "Downloading..." : "Download"}
@@ -230,11 +230,13 @@ export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) 
               />
             </div>
             <div className="flex items-center justify-center p-4 border rounded-md bg-muted/50">
-              <div 
-                className="bg-primary/10 border border-primary/20"
-                style={{ 
-                  width: `${Math.min(customWidth / 4, 200)}px`, 
-                  height: `${Math.min(customHeight / 4, 112.5)}px` 
+              <img
+                src={thumbnail.url}
+                alt="Preview"
+                className="max-w-full max-h-32 object-contain"
+                style={{
+                  width: `${Math.min(customWidth / 4, 200)}px`,
+                  height: `${Math.min(customHeight / 4, 112.5)}px`
                 }}
               />
             </div>

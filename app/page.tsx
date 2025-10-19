@@ -1,7 +1,7 @@
 'use client'
 import YouTubeExtractor from '@/components/YouTubeExtractor';
 import { ModeToggle } from '@/components/mode-toggle';
-import { AdBanner } from '@/components/AdBanner';
+// import { AdBanner } from '@/components/AdBanner'; // Temporarily disabled
 import { SocialShare } from '@/components/SocialShare';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -18,12 +18,19 @@ export default function Home() {
   return (
     <main className="min-h-screen p-4 md:p-6 lg:p-8">
       <div className="max-w-5xl mx-auto">
-        <AdBanner className="mb-8" position="top" />
+        {/* <AdBanner className="mb-8" position="top" /> */}
         
         <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="text-2xl md:text-3xl font-bold hover:underline focus:outline-none">
-              YT Snap
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 focus:outline-none group">
+              <img
+                src="/icon-64x64.png"
+                alt="YT Snap Logo"
+                className="w-10 h-10 md:w-12 md:h-12"
+              />
+              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-slow font-cursive">
+                YT Snap
+              </span>
             </Link>
             <p className="text-muted-foreground text-sm hidden md:block">
               | YouTube Thumbnail Extractor
@@ -46,8 +53,8 @@ export default function Home() {
           </button>
         </div>
         <YouTubeExtractor key={extractorKey} />
-        
-        <AdBanner className="my-8" position="bottom" />
+
+        {/* <AdBanner className="my-8" position="bottom" /> */}
         
         <footer className="mt-12 pt-6 border-t text-center text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
