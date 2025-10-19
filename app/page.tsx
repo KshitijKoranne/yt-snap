@@ -16,11 +16,11 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-6 lg:p-8">
-      <div className="max-w-5xl mx-auto">
+    <main className="min-h-screen p-4 md:p-6 lg:p-8 flex flex-col">
+      <div className="max-w-5xl mx-auto w-full">
         {/* <AdBanner className="mb-8" position="top" /> */}
-        
-        <header className="flex items-center justify-between mb-8">
+
+        <header className="flex items-center justify-between mb-8 w-full">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3 focus:outline-none group">
               <img
@@ -56,20 +56,18 @@ export default function Home() {
 
         {/* <AdBanner className="my-8" position="bottom" /> */}
         
-        <footer className="mt-12 pt-6 border-t text-center text-sm text-muted-foreground">
+        <footer className="mt-auto pt-12 pb-6 border-t text-center text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
             <Link href="/privacy-policy" className="hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <span className="hidden md:inline">•</span>
             <SocialShare className="md:hidden" />
           </div>
           <div className="flex flex-col items-center gap-2">
             <div className="flex items-center gap-1">
-              <span>Made in</span>
-              <span>INDIA</span>
+              <span>Made in INDIA 🇮🇳</span>
             </div>
-            <p>© 2025 KSK Labs • All rights reserved</p>
+            <p>© 2025 KJR Labs • All rights reserved</p>
             {/* Buy Me a Coffee Button */}
             <div className="mt-2">
               <Script
