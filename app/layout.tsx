@@ -14,14 +14,21 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: 'YT Snap - YouTube Thumbnail Extractor',
-  description: 'Extract YouTube thumbnails in various resolutions quickly and easily',
-  metadataBase: new URL('https://yt-snap.in'),
+  title: 'YT Snap - YouTube Thumbnail Extractor | Download HD Thumbnails',
+  description: 'Extract and download high-quality YouTube thumbnails in multiple resolutions. Free, fast, and easy-to-use YouTube thumbnail downloader with video metadata display.',
+  metadataBase: new URL('https://yt-snap.vercel.app'),
+  keywords: ['youtube thumbnail', 'thumbnail extractor', 'thumbnail downloader', 'youtube thumbnail download', 'hd thumbnail', 'youtube image', 'video thumbnail'],
+  authors: [{ name: 'KJR Labs' }],
+  creator: 'KJR Labs',
+  publisher: 'KJR Labs',
   manifest: '/manifest.json',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'YT Snap - YouTube Thumbnail Extractor',
-    description: 'Extract YouTube thumbnails in various resolutions quickly and easily',
-    url: 'https://yt-snap.in',
+    description: 'Extract and download high-quality YouTube thumbnails in multiple resolutions. Free, fast, and easy-to-use.',
+    url: 'https://yt-snap.vercel.app',
     siteName: 'YT Snap',
     images: [
       {
@@ -37,12 +44,19 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'YT Snap - YouTube Thumbnail Extractor',
-    description: 'Extract YouTube thumbnails in various resolutions quickly and easily',
+    description: 'Extract and download high-quality YouTube thumbnails in multiple resolutions',
     images: ['/og-image.svg'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: [
@@ -92,7 +106,7 @@ export default function RootLayout({
               "@type": "WebApplication",
               "name": "YT Snap",
               "alternateName": "YouTube Thumbnail Extractor",
-              "url": "https://yt-snap.in",
+              "url": "https://yt-snap.vercel.app",
               "description": "Extract YouTube thumbnails in various resolutions quickly and easily. Download high-quality thumbnails from any YouTube video.",
               "applicationCategory": "UtilitiesApplication",
               "operatingSystem": "Web Browser",
@@ -108,7 +122,7 @@ export default function RootLayout({
                 "Custom thumbnail sizes",
                 "Progressive Web App support"
               ],
-              "screenshot": "https://yt-snap.in/og-image.svg",
+              "screenshot": "https://yt-snap.vercel.app/og-image.svg",
               "author": {
                 "@type": "Organization",
                 "name": "KSK Labs"

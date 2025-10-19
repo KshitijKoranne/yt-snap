@@ -1,11 +1,52 @@
 import Link from 'next/link';
 import { ModeToggle } from '@/components/mode-toggle';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy - YT Snap',
+  description: 'Privacy policy for YT Snap - YouTube Thumbnail Extractor. Learn how we protect your privacy and handle your data.',
+  alternates: {
+    canonical: '/privacy-policy',
+  },
+  openGraph: {
+    title: 'Privacy Policy - YT Snap',
+    description: 'Privacy policy for YT Snap - YouTube Thumbnail Extractor',
+    url: 'https://yt-snap.vercel.app/privacy-policy',
+    type: 'website',
+  },
+};
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen p-4 md:p-6 lg:p-8">
-      <div className="max-w-4xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
+    <>
+      {/* Breadcrumb Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yt-snap.vercel.app"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Privacy Policy",
+                "item": "https://yt-snap.vercel.app/privacy-policy"
+              }
+            ]
+          })
+        }}
+      />
+
+      <div className="min-h-screen p-4 md:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto">
+          <header className="flex items-center justify-between mb-8">
           <Link href="/" className="flex items-center gap-3 focus:outline-none group">
             <img
               src="/icon-64x64.png"
@@ -23,7 +64,7 @@ export default function PrivacyPolicy() {
       
       <div className="prose prose-slate dark:prose-invert max-w-none">
         <p className="text-muted-foreground mb-6">
-          At YT Snap, accessible from <Link href="/" className="text-primary hover:underline">https://yt-snap.vercel.app</Link>,
+          At YT Snap, accessible from <a href="https://yt-snap.vercel.app" className="text-primary hover:underline">https://yt-snap.vercel.app</a>,
           one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information
           that is collected and recorded by YT Snap and how we use it.
         </p>
@@ -91,7 +132,8 @@ export default function PrivacyPolicy() {
         </div>
         <p>© 2025 KJR Labs • All rights reserved</p>
       </footer>
-    </div>
-    </div>
+        </div>
+      </div>
+    </>
   );
 } 
