@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'YT Snap',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'YT Snap - YouTube Thumbnail Extractor',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'YT Snap - YouTube Thumbnail Extractor',
     description: 'Extract and download high-quality YouTube thumbnails in multiple resolutions',
-    images: ['/og-image.svg'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -79,6 +79,16 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'YT Snap',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -122,10 +132,10 @@ export default function RootLayout({
                 "Custom thumbnail sizes",
                 "Progressive Web App support"
               ],
-              "screenshot": "https://yt-snap.vercel.app/og-image.svg",
+              "screenshot": "https://yt-snap.vercel.app/og-image.png",
               "author": {
                 "@type": "Organization",
-                "name": "KSK Labs"
+                "name": "KJR Labs"
               },
               "aggregateRating": {
                 "@type": "AggregateRating",

@@ -3,6 +3,7 @@ import YouTubeExtractor from '@/components/YouTubeExtractor';
 import { ModeToggle } from '@/components/mode-toggle';
 // import { AdBanner } from '@/components/AdBanner'; // Temporarily disabled
 import { SocialShare } from '@/components/SocialShare';
+import { BuyMeCoffeeButton } from '@/components/BuyMeCoffeeButton';
 import Link from 'next/link';
 import Script from 'next/script';
 import { useState } from 'react';
@@ -70,21 +71,24 @@ export default function Home() {
 
         <header className="flex items-center justify-between mb-8 w-full">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-3 focus:outline-none group">
+            <Link href="/" className="flex items-center gap-3 focus:outline-none group" aria-label="YT Snap Home">
               <img
                 src="/icon-64x64.png"
-                alt="YT Snap Logo"
+                alt="YT Snap - YouTube Thumbnail Extractor Logo"
                 className="w-10 h-10 md:w-12 md:h-12"
+                width="48"
+                height="48"
               />
-              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-slow font-cursive">
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-slow font-cursive">
                 YT Snap
-              </span>
+              </h1>
             </Link>
             <p className="text-muted-foreground text-sm hidden md:block">
               | YouTube Thumbnail Extractor
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-3">
+            <BuyMeCoffeeButton className="hidden sm:flex" />
             <SocialShare className="hidden md:flex" />
             <ModeToggle />
           </div>
@@ -95,12 +99,14 @@ export default function Home() {
           <button
             onClick={handleReset}
             className="px-4 py-2 rounded bg-muted text-foreground border hover:bg-primary/10 transition-colors text-sm font-medium"
-            aria-label="Reset"
+            aria-label="Reset YouTube Thumbnail Extractor"
           >
             Reset
           </button>
         </div>
-        <YouTubeExtractor key={extractorKey} />
+        <article>
+          <YouTubeExtractor key={extractorKey} />
+        </article>
 
         {/* <AdBanner className="my-8" position="bottom" /> */}
         
@@ -116,28 +122,6 @@ export default function Home() {
               <span>Made in INDIA 🇮🇳</span>
             </div>
             <p>© 2025 KJR Labs • All rights reserved</p>
-            {/* Buy Me a Coffee Button */}
-            <div className="mt-2">
-              <Script
-                type="text/javascript"
-                src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-                data-name="bmc-button"
-                data-slug="kshitijkorz"
-                data-color="#FF5F5F"
-                data-emoji=""
-                data-font="Cookie"
-                data-text="Buy me a coffee"
-                data-outline-color="#000000"
-                data-font-color="#ffffff"
-                data-coffee-color="#FFDD00"
-                strategy="afterInteractive"
-              />
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: `<div class="bmc-btn-container"><a href="https://www.buymeacoffee.com/kshitijkorz" target="_blank" class="bmc-btn" rel="noopener"><span class="bmc-btn-text">Buy me a coffee</span></a></div>`
-                }}
-              />
-            </div>
           </div>
         </footer>
       </div>

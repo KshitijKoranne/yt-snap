@@ -47,11 +47,13 @@ export default function PrivacyPolicy() {
       <div className="min-h-screen p-4 md:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
           <header className="flex items-center justify-between mb-8">
-          <Link href="/" className="flex items-center gap-3 focus:outline-none group">
+          <Link href="/" className="flex items-center gap-3 focus:outline-none group" aria-label="YT Snap Home">
             <img
               src="/icon-64x64.png"
-              alt="YT Snap Logo"
+              alt="YT Snap - YouTube Thumbnail Extractor Logo"
               className="w-10 h-10 md:w-12 md:h-12"
+              width="48"
+              height="48"
             />
             <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-slow font-cursive">
               YT Snap
@@ -60,6 +62,7 @@ export default function PrivacyPolicy() {
           <ModeToggle />
         </header>
 
+        <article>
         <h1 className="text-3xl font-bold mb-8">Privacy Policy</h1>
       
       <div className="prose prose-slate dark:prose-invert max-w-none">
@@ -125,6 +128,7 @@ export default function PrivacyPolicy() {
           Last updated: {new Date().toLocaleDateString()}
         </p>
       </div>
+      </article>
 
       <footer className="mt-12 pt-6 border-t text-center text-sm text-muted-foreground">
         <div className="flex items-center justify-center gap-1 mb-2">

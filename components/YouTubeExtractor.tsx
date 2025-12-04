@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { extractYouTubeId, isValidYouTubeUrl } from "@/lib/youtube-utils";
 import { useYouTubeMetadata } from "@/hooks/useYouTubeMetadata";
 import ThumbnailGallery from "@/components/ThumbnailGallery";
+import RecentHistory from "@/components/RecentHistory";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, Search, Info } from "lucide-react";
@@ -11,6 +12,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AnimatePresence, motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { addToHistory } from "@/lib/history-utils";
 
 export default function YouTubeExtractor() {
   const [url, setUrl] = useState("");
@@ -48,6 +50,8 @@ export default function YouTubeExtractor() {
       }
 
       setVideoId(id);
+      // Add to history
+      addToHistory(trimmedUrl, id);
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
       console.error("Error processing YouTube URL:", err);
@@ -55,6 +59,23 @@ export default function YouTubeExtractor() {
       setIsProcessing(false);
     }
   };
+
+  const handleSelectFromHistory = (historyUrl: string) => {
+    setUrl(historyUrl);
+    // Trigger extraction automatically
+    const id = extractYouTubeId(historyUrl);
+    if (id) {
+      setVideoId(id);
+      setError(null);
+    }
+  };
+
+  // Update history with title when metadata loads
+  useEffect(() => {
+    if (videoId && metadata?.title) {
+      addToHistory(url, videoId, metadata.title);
+    }
+  }, [metadata, videoId, url]);
 
   return (
     <div>
@@ -66,6 +87,8 @@ export default function YouTubeExtractor() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl mx-auto mb-8">
+        <RecentHistory onSelectUrl={handleSelectFromHistory} />
+        
         <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-grow">
             <Input

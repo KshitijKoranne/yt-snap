@@ -5,7 +5,7 @@ import ThumbnailCard from "./ThumbnailCard";
 import { ThumbnailType, VideoMetadata } from "@/lib/types";
 import { generateThumbnailData } from "@/lib/youtube-utils";
 import { Button } from "@/components/ui/button";
-import { Download, Eye, ThumbsUp, Calendar, Clock, User } from "lucide-react";
+import { Download, Eye, ThumbsUp, Calendar, Clock, User, Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 import JSZip from "jszip";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,6 +21,7 @@ interface ThumbnailGalleryProps {
 export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata }: ThumbnailGalleryProps) {
   const [thumbnails, setThumbnails] = useState<ThumbnailType[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     if (videoId) {
@@ -65,6 +66,24 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
     }
   };
 
+  const handleCopyUrl = async () => {
+    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    
+    try {
+      await navigator.clipboard.writeText(videoUrl);
+      setIsCopied(true);
+      toast.success("Video URL copied to clipboard!");
+      
+      // Reset icon after 2 seconds
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Error copying to clipboard:", error);
+      toast.error("Failed to copy URL. Please try again.");
+    }
+  };
+
   if (!thumbnails.length) {
     return null;
   }
@@ -76,18 +95,22 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
           <CardContent className="pt-6">
             <div className="space-y-4">
               <div>
-                <Skeleton className="h-8 w-3/4 mb-2" />
-                <Skeleton className="h-4 w-1/4" />
+                <Skeleton className="h-8 w-3/4 mb-3" />
+                <Skeleton className="h-4 w-1/3" />
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="space-y-2">
                     <Skeleton className="h-4 w-16" />
-                    <Skeleton className="h-5 w-20" />
+                    <Skeleton className="h-6 w-20" />
                   </div>
                 ))}
               </div>
-              <Skeleton className="h-16 w-full" />
+              <div className="pt-2 border-t space-y-2">
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-5/6" />
+                <Skeleton className="h-3 w-4/6" />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -97,7 +120,28 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
           <CardContent className="pt-6">
             <div className="space-y-4">
               <div>
-                <h3 className="text-2xl font-bold mb-2">{metadata.title}</h3>
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <h3 className="text-2xl font-bold flex-1">{metadata.title}</h3>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleCopyUrl}
+                    className="gap-2 shrink-0"
+                    title="Copy video URL"
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="h-4 w-4" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4" />
+                        Copy URL
+                      </>
+                    )}
+                  </Button>
+                </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <User className="h-4 w-4" />
                   <span className="font-medium">{metadata.channelTitle}</span>
