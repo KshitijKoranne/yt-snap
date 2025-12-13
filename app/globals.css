@@ -80,15 +80,39 @@
   }
   body {
     @apply text-foreground;
+    position: relative;
+    background-color: #ffffff;
+  }
+
+  /* Light mode frost effect background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
     background-color: #f8f9fa;
-    background: radial-gradient(circle, transparent 20%, #f8f9fa 20%, #f8f9fa 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #f8f9fa 20%, #f8f9fa 80%, transparent 80%, transparent) 20px 20px, linear-gradient(#d1d5db 1.6px, transparent 1.6px) 0 -0.8px, linear-gradient(90deg, #d1d5db 1.6px, #f8f9fa 1.6px) -0.8px 0;
+    background: radial-gradient(circle, transparent 20%, rgba(248, 249, 250, 0.6) 20%, rgba(248, 249, 250, 0.6) 80%, transparent 80%, transparent), 
+                radial-gradient(circle, transparent 20%, rgba(248, 249, 250, 0.6) 20%, rgba(248, 249, 250, 0.6) 80%, transparent 80%, transparent) 20px 20px, 
+                linear-gradient(rgba(209, 213, 219, 0.3) 1.6px, transparent 1.6px) 0 -0.8px, 
+                linear-gradient(90deg, rgba(209, 213, 219, 0.3) 1.6px, rgba(248, 249, 250, 0.6) 1.6px) -0.8px 0;
     background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
   }
 
   .dark body {
     background-color: #0f172a;
+  }
+
+  .dark body::before {
+    background-color: #0f172a;
     background: radial-gradient(circle, transparent 20%, #0f172a 20%, #0f172a 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #0f172a 20%, #0f172a 80%, transparent 80%, transparent) 20px 20px, linear-gradient(#334155 1.6px, transparent 1.6px) 0 -0.8px, linear-gradient(90deg, #334155 1.6px, #0f172a 1.6px) -0.8px 0;
     background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 

@@ -94,6 +94,23 @@ export default function Home() {
           </div>
         </header>
 
+        {/* Chrome Extension Coming Soon Banner */}
+        <div className="mb-6 p-4 rounded-lg border border-indigo-200 dark:border-indigo-900 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30 backdrop-blur-sm">
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-indigo-600 dark:text-indigo-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 14.894c-.553.553-1.447.553-2 0L12 11l-3.894 3.894c-.553.553-1.447.553-2 0s-.553-1.447 0-2L10 9l-3.894-3.894c-.553-.553-.553-1.447 0-2s1.447-.553 2 0L12 7l3.894-3.894c.553-.553 1.447-.553 2 0s.553 1.447 0 2L14 9l3.894 3.894c.553.553.553 1.447 0 2z"/>
+              </svg>
+              <span className="text-sm md:text-base font-semibold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                Chrome Extension Coming Soon!
+              </span>
+            </div>
+            <span className="text-xs md:text-sm text-muted-foreground">
+              Extract thumbnails directly from your browser
+            </span>
+          </div>
+        </div>
+
         {/* Add reset button above the extractor */}
         <div className="flex justify-end mb-2">
           <button
