@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ThumbnailCard from "./ThumbnailCard";
 import { ThumbnailType, VideoMetadata } from "@/lib/types";
 import { generateThumbnailData } from "@/lib/youtube-utils";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Button } from "@/components/ui/button";
 import { Download, Eye, ThumbsUp, Calendar, Clock, User, Copy, Check } from "lucide-react";
 import { toast } from "sonner";
@@ -19,6 +20,7 @@ interface ThumbnailGalleryProps {
 }
 
 export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata }: ThumbnailGalleryProps) {
+  const { t } = useTranslation();
   const [thumbnails, setThumbnails] = useState<ThumbnailType[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -137,7 +139,7 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
                     ) : (
                       <>
                         <Copy className="h-4 w-4" />
-                        Copy URL
+                        {t.card.copyUrl}
                       </>
                     )}
                   </Button>
@@ -153,7 +155,7 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
                   <div className="flex items-center gap-2">
                     <Eye className="h-4 w-4 text-blue-500" />
                     <div>
-                      <div className="text-muted-foreground text-xs">Views</div>
+                      <div className="text-muted-foreground text-xs">{t.gallery.views}</div>
                       <div className="font-semibold">{metadata.viewCount}</div>
                     </div>
                   </div>
@@ -173,7 +175,7 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-purple-500" />
                     <div>
-                      <div className="text-muted-foreground text-xs">Duration</div>
+                      <div className="text-muted-foreground text-xs">{t.gallery.duration}</div>
                       <div className="font-semibold">{metadata.duration}</div>
                     </div>
                   </div>
@@ -183,7 +185,7 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-orange-500" />
                     <div>
-                      <div className="text-muted-foreground text-xs">Published</div>
+                      <div className="text-muted-foreground text-xs">{t.gallery.publishedAt}</div>
                       <div className="font-semibold">
                         {format(new Date(metadata.publishedAt), 'MMM d, yyyy')}
                       </div>
@@ -205,14 +207,14 @@ export default function ThumbnailGallery({ videoId, metadata, isLoadingMetadata 
       )}
 
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-medium">Available Thumbnails</h3>
+        <h3 className="text-xl font-medium">{t.gallery.thumbnails}</h3>
         <Button
           onClick={downloadAllThumbnails}
           disabled={isDownloading}
           className="gap-2"
         >
           <Download className="h-4 w-4" />
-          {isDownloading ? "Downloading..." : "Download All"}
+          {isDownloading ? t.gallery.downloading : t.gallery.downloadAll}
         </Button>
       </div>
 

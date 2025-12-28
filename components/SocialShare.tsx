@@ -83,14 +83,7 @@ export function SocialShare({
         <Linkedin className="h-4 w-4" />
       </Button>
       
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={handleShare}
-        title="Share"
-      >
-        <Share2 className="h-4 w-4" />
-      </Button>
+
     </div>
   );
 } 

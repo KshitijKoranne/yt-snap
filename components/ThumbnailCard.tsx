@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ThumbnailType } from "@/lib/types";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Button } from "@/components/ui/button";
 import { Download, ExternalLink, Maximize2 } from "lucide-react";
 import { toast } from "sonner";
@@ -24,6 +25,7 @@ interface ThumbnailCardProps {
 }
 
 export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [customWidth, setCustomWidth] = useState(1280);
   const [customHeight, setCustomHeight] = useState(720);
@@ -157,7 +159,7 @@ export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) 
               className="gap-1 w-full max-w-[140px]"
             >
               <Download className="h-4 w-4" />
-              {isDownloading ? "Downloading..." : "Download"}
+              {isDownloading ? t.gallery.downloading : t.card.download}
             </Button>
           </div>
         </div>
@@ -251,7 +253,7 @@ export default function ThumbnailCard({ thumbnail, index }: ThumbnailCardProps) 
               className="gap-1"
             >
               <Download className="h-4 w-4" />
-              {isDownloading ? "Downloading..." : "Download"}
+              {isDownloading ? t.gallery.downloading : t.card.download}
             </Button>
           </DialogFooter>
         </DialogContent>

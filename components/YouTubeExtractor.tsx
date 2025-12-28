@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { extractYouTubeId, isValidYouTubeUrl } from "@/lib/youtube-utils";
 import { useYouTubeMetadata } from "@/hooks/useYouTubeMetadata";
+import { useTranslation } from "@/hooks/useTranslation";
 import ThumbnailGallery from "@/components/ThumbnailGallery";
 import RecentHistory from "@/components/RecentHistory";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Search, Info } from "lucide-react";
+import { AlertCircle, Search, Info, Clipboard } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AnimatePresence, motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { addToHistory } from "@/lib/history-utils";
 
 export default function YouTubeExtractor() {
+  const { t } = useTranslation();
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,21 +32,21 @@ export default function YouTubeExtractor() {
 
     const trimmedUrl = url.trim();
     if (!trimmedUrl) {
-      setError("Please enter a YouTube URL");
+      setError(t.errors.emptyUrl);
       setIsProcessing(false);
       return;
     }
 
     try {
       if (!isValidYouTubeUrl(trimmedUrl)) {
-        setError("Please enter a valid YouTube URL (e.g., https://www.youtube.com/watch?v=...)");
+        setError(t.errors.invalidUrl);
         setIsProcessing(false);
         return;
       }
 
       const id = extractYouTubeId(trimmedUrl);
       if (!id) {
-        setError("Could not extract video ID. Please check if the URL is correct and try again.");
+        setError(t.errors.extractionFailed);
         setIsProcessing(false);
         return;
       }
@@ -53,7 +55,7 @@ export default function YouTubeExtractor() {
       // Add to history
       addToHistory(trimmedUrl, id);
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+      setError(t.errors.unexpectedError);
       console.error("Error processing YouTube URL:", err);
     } finally {
       setIsProcessing(false);
@@ -70,6 +72,18 @@ export default function YouTubeExtractor() {
     }
   };
 
+  const handlePaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        setUrl(text);
+      }
+    } catch (err) {
+      console.error("Failed to read clipboard:", err);
+      // Fallback or silent fail if permission denied
+    }
+  };
+
   // Update history with title when metadata loads
   useEffect(() => {
     if (videoId && metadata?.title) {
@@ -80,9 +94,9 @@ export default function YouTubeExtractor() {
   return (
     <div>
       <div className="mb-8 text-center">
-        <h2 className="text-2xl font-semibold mb-2">Extract YouTube Thumbnails</h2>
+        <h2 className="text-2xl font-semibold mb-2">{t.extractor.heading}</h2>
         <p className="text-muted-foreground">
-          Paste a YouTube link to download thumbnails in various resolutions
+          {t.extractor.description}
         </p>
       </div>
 
@@ -95,20 +109,31 @@ export default function YouTubeExtractor() {
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="Paste YouTube URL here..."
-              className="pr-10"
+              placeholder={t.extractor.placeholder}
+              className="pr-20"
               disabled={isProcessing}
             />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-2 text-muted-foreground hover:text-foreground"
+              onClick={handlePaste}
+              title="Paste from clipboard"
+            >
+              <Clipboard className="h-4 w-4 mr-1" />
+              <span className="text-xs">Paste</span>
+            </Button>
           </div>
           <Button type="submit" className="font-medium" disabled={isProcessing}>
             {isProcessing ? (
               <div className="flex items-center">
                 <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
-                Processing...
+                {t.extractor.processing}
               </div>
             ) : (
               <>
-                <Search className="mr-2 h-4 w-4" /> Extract
+                <Search className="mr-2 h-4 w-4" /> {t.extractor.extractButton}
               </>
             )}
           </Button>

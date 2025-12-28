@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT Snap - YouTube Thumbnail Extractor</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <img src="icons/icon-128x128.png" alt="YT Snap Logo" class="logo">
+        <div class="header-text">
+          <h1 class="title">YT Snap</h1>
+          <p class="subtitle">YouTube Thumbnail Extractor</p>
+        </div>
+        <a href="https://yt-snap.vercel.app/" target="_blank" class="website-link">
+          Visit YT Snap Website →
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- URL Input Section -->
+      <div class="input-section">
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="urlInput" 
+            class="url-input" 
+            placeholder="Paste YouTube URL here..."
+            autocomplete="off"
+          >
+          <button id="extractBtn" class="extract-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <span>Extract</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Error Message -->
+      <div id="errorMessage" class="error-message" style="display: none;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="errorText"></span>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="loading-state" style="display: none;">
+        <div class="spinner"></div>
+        <p>Extracting thumbnails...</p>
+      </div>
+
+      <!-- Thumbnails Gallery -->
+      <div id="thumbnailsSection" style="display: none;">
+        <div class="gallery-header">
+          <h2 class="gallery-title">Available Thumbnails</h2>
+          <button id="downloadAllBtn" class="download-all-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download All</span>
+          </button>
+        </div>
+        <div id="thumbnailsGrid" class="thumbnails-grid"></div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with ❤️ by <a href="https://kjrlabs.in" target="_blank" class="footer-link">KJR Labs</a></p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="lib/jszip.min.js"></script>
+  <script src="utils/youtube-utils.js"></script>
+  <script src="scripts/popup.js"></script>
+</body>
+</html>

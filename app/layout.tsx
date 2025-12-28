@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Dancing_Script } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
+import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/sonner';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Script from 'next/script';
@@ -148,15 +148,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+          <Providers>
             {children}
             <Toaster />
-          </ThemeProvider>
+          </Providers>
         </ErrorBoundary>
       </body>
     </html>

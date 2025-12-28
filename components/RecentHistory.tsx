@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getHistory, clearHistory, HistoryItem } from "@/lib/history-utils";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Trash2, ChevronDown, ChevronUp } from "lucide-react";
@@ -14,6 +15,7 @@ interface RecentHistoryProps {
 }
 
 export default function RecentHistory({ onSelectUrl }: RecentHistoryProps) {
+  const { t } = useTranslation();
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -51,7 +53,7 @@ export default function RecentHistory({ onSelectUrl }: RecentHistoryProps) {
       >
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4" />
-          <span>Recent History ({history.length})</span>
+          <span>{t.history.title} ({history.length})</span>
         </div>
         {isExpanded ? (
           <ChevronUp className="h-4 w-4" />
