@@ -8,7 +8,7 @@ export const en = {
 
   // Banner
   banner: {
-    title: "Chrome Extension Coming Soon!",
+    title: "Chrome Extension Available Now!",
     subtitle: "Extract thumbnails directly from your browser",
   },
 
