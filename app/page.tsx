@@ -10,6 +10,7 @@ import Script from 'next/script';
 import { useState } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 
+const CHROME_EXTENSION_URL = 'https://chromewebstore.google.com/detail/dgkjmjkiobomdkcohebpjhlpobkigcck?utm_source=item-share-cb';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -99,12 +100,12 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Chrome Extension Coming Soon Banner */}
+        {/* Chrome Extension Banner */}
         <div className="mb-6 p-4 rounded-lg border border-indigo-200 dark:border-indigo-900 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30 backdrop-blur-sm">
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-indigo-600 dark:text-indigo-400" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 14.894c-.553.553-1.447.553-2 0L12 11l-3.894 3.894c-.553.553-1.447.553-2 0s-.553-1.447 0-2L10 9l-3.894-3.894c-.553-.553-.553-1.447 0-2s1.447-.553 2 0L12 7l3.894-3.894c.553-.553 1.447-.553 2 0s.553 1.447 0 2L14 9l3.894 3.894c.553.553.553 1.447 0 2z"/>
+              <svg className="w-5 h-5 text-indigo-600 dark:text-indigo-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 1 0 8.66 5H12a5 5 0 0 0-4.33 2.5L4.5 4A9.96 9.96 0 0 1 12 2Zm0 20a10 10 0 0 1-8.66-15l4.33 7.5A5 5 0 0 0 12 17h8.66A9.96 9.96 0 0 1 12 22Zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm2.83-5H22a10 10 0 0 1 0 4h-7.17A5 5 0 0 0 14.83 10Z"/>
               </svg>
               <span className="text-sm md:text-base font-semibold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
                 {t.banner.title}
@@ -113,6 +114,15 @@ export default function Home() {
             <span className="text-xs md:text-sm text-muted-foreground">
               {t.banner.subtitle}
             </span>
+            <a
+              href={CHROME_EXTENSION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-background"
+              aria-label="Install the YT Snap Chrome extension from the Chrome Web Store"
+            >
+              Add to Chrome
+            </a>
           </div>
         </div>
 
