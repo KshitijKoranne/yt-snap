@@ -10,7 +10,7 @@ export const hi: TranslationKeys = {
 
   // Banner
   banner: {
-    title: "Chrome Extension जल्द आ रहा है!",
+    title: "Chrome Extension अब उपलब्ध है!",
     subtitle: "अपने ब्राउज़र से सीधे thumbnails निकालें",
   },
 
